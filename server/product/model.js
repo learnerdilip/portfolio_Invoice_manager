@@ -34,7 +34,7 @@ const Product = sequelize.define("product", {
   }
 });
 
-Room.hasMany(Document);
-Document.belongsTo(Room);
+Room.hasMany(Product);
+Product.belongsTo(Room);
 
 module.exports = Product;
