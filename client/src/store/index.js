@@ -1,7 +1,9 @@
 import { combineReducers } from "redux";
-import userState from "./user/reducer";
+import user from "./user/reducer";
+import product from "./product/reducer";
 
 export default combineReducers({
   // your reducers will go here
-  userState
+  user,
+  product
 });

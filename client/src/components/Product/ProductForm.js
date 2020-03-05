@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import {createProduct} from "../../store/product/action"
 
 export default function ProductForm() {
+  const dispatch = useDispatch();
+
   const [productData, setProductData] = useState({
     documentName: "",
     nameOnInvoice: "",
@@ -13,6 +17,11 @@ export default function ProductForm() {
   });
 
   const [loading, setLoading] = useState(false);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch(createProduct(productData));
+  };
 
   const handleFileSelect = async e => {
     setLoading(true);
@@ -36,11 +45,11 @@ export default function ProductForm() {
     });
   };
 
-  console.log("-----the State-------", productData);
+  // console.log("-----the State-------", productData);
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Document Name</label>
         <input
           type="text"

@@ -1,7 +1,13 @@
 import React from "react";
 import ProductFormContainer from "./ProductFormContainer";
+import { useSelector } from "react-redux";
 
 export default function ProductContainer() {
+  const state = useSelector(reduxState => {
+    return {
+      productState: reduxState.product
+    };
+  });
   return (
     <div>
       <h2>The product container component</h2>
