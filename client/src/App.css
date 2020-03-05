@@ -1,5 +1,14 @@
 .productcontainer {
   width: 50%;
-  margin: auto;
   padding: 1rem;
+}
+
+.roomcards {
+  display: inline-block;
+  width: 20%;
+  min-height: 200px;
+  border: solid black 0.5px;
+  margin: 5rem;
+  text-align: center;
+  background-color: slategray;
 }
