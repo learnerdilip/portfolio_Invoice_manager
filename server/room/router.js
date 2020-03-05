@@ -15,4 +15,13 @@ router.post("/room", async (request, response, next) => {
   }
 });
 
+router.get("/rooms", async (request, response, next) => {
+  try {
+    const fetchedRooms = await Room.findAll();
+    response.send(fetchedRooms);
+  } catch {
+    error => next(error);
+  }
+});
+
 module.exports = router;

@@ -17,8 +17,16 @@ router.post("/product", async (request, response, next) => {
       other_image: request.body.miscellaneousImage
     });
     // console.log("---Backend pdt created----", productCreate);
-
     response.send(productCreate);
+  } catch (error) {
+    next(console.error);
+  }
+});
+
+router.get("/products", async (request, response, next) => {
+  try {
+    const productsArray = await Product.findAll();
+    response.send(productsArray);
   } catch (error) {
     next(console.error);
   }
