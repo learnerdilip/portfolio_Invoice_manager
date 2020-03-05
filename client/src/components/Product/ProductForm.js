@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {createProduct} from "../../store/product/action"
+import { createProduct } from "../../store/product/action";
+import { Form } from "react-bootstrap";
 
 export default function ProductForm() {
   const dispatch = useDispatch();
@@ -34,7 +35,10 @@ export default function ProductForm() {
       { method: "POST", body: data }
     );
     const file = await res.json();
-    productData.warrantyDocument(file.url);
+    setProductData(prevState => {
+      return { ...prevState, warrantyDocument: file.url };
+    });
+    // productData.warrantyDocument(file.url);
     setLoading(false);
   };
 
@@ -48,64 +52,72 @@ export default function ProductForm() {
   // console.log("-----the State-------", productData);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Document Name</label>
-        <input
+    <div className="userform">
+      <Form onSubmit={handleSubmit}>
+        <Form.Label>Document Name</Form.Label>
+        <Form.Control
           type="text"
           placeholder="Document Name"
           name="documentName"
           value={productData.documentName}
           onChange={handleChange}
         />
-        <label>Name on Invoice *</label>
-        <input
+        <br />
+        <Form.Label>Name on Invoice *</Form.Label>
+        <Form.Control
           type="text"
           placeholder="Name on Invoice"
           name="nameOnInvoice"
           value={productData.nameOnInvoice}
           onChange={handleChange}
         />
-        <label>Device Name</label>
-        <input
+        <br />
+        <Form.Label>Device Name</Form.Label>
+        <Form.Control
           type="text"
           placeholder="The device name"
           name="deviceName"
           value={productData.deviceName}
           onChange={handleChange}
         />
-        <label>Purchase Date *</label>
-        <input
+        <br />
+        <Form.Label>Purchase Date *</Form.Label>
+        <Form.Control
           type="date"
           name="purchaseDate"
           value={productData.purchaseDate}
           onChange={handleChange}
         />
-        <label>warranty start date *</label>
-        <input
+        <br />
+        <Form.Label>warranty start date *</Form.Label>
+        <Form.Control
           type="date"
           name="warrantyStartDate"
           value={productData.warrantyStartDate}
           onChange={handleChange}
         />
-        <label>warranty end date *</label>
-        <input
+        <br />
+        <Form.Label>warranty end date *</Form.Label>
+        <Form.Control
           type="date"
-          name="warranty_end_date"
+          name="warrantyEndDate"
           value={productData.warrantyEndDate}
           onChange={handleChange}
         />
-        <label>warranty Document Image to be stored *</label>
-        <input
+        <br />
+        <Form.Label>warranty Document Image to be stored *</Form.Label>
+        <Form.Control
           type="file"
           name="warranty_document_image"
           onChange={handleFileSelect}
         />{" "}
+        <br />
         {loading && <h5>Loading...</h5>}
-        <label>Any other associated image</label>
-        <input type="file" name="other_image" />
+        <Form.Label>Any other associated image</Form.Label>
+        <Form.Control type="file" name="other_image" />
+        <br />
         <button type="submit">SUBMIT</button>
-      </form>
+      </Form>
     </div>
   );
 }
