@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../../store/product/action";
 import { Form } from "react-bootstrap";
 
 export default function ProductForm() {
   const dispatch = useDispatch();
+  const state = useSelector(reduxState => {
+    return {
+      roomState: reduxState.room
+    };
+  });
+  console.log(
+    "---looking for roomId THROUGHT STATE---",
+    state.roomState.currentRoom
+  );
 
   const [productData, setProductData] = useState({
     documentName: "",
@@ -14,9 +23,9 @@ export default function ProductForm() {
     warrantyStartDate: null,
     warrantyEndDate: null,
     warrantyDocument: "",
-    miscellaneousImage: ""
+    miscellaneousImage: "",
+    roomId: state.roomState.currentRoom.id
   });
-
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = e => {

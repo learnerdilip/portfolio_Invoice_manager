@@ -1,4 +1,4 @@
-const initalState = { rooms: [] };
+const initalState = { rooms: [], currentRoom: null };
 
 const roomReducer = (state = initalState, action = {}) => {
   switch (action.type) {
@@ -7,6 +7,9 @@ const roomReducer = (state = initalState, action = {}) => {
     }
     case "ROOMS_FETCHED": {
       return { ...state, rooms: action.payload };
+    }
+    case "UPDATE_CURRENT_ROOM": {
+      return { ...state, currentRoom: action.payload };
     }
     default: {
       return { ...state };

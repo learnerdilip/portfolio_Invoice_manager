@@ -1,27 +1,19 @@
 import React, { useEffect } from "react";
 import ProductFormContainer from "./ProductFormContainer";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts } from "../../store/product/action";
-import { Modal, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+// import { getProducts } from "../../store/product/action";
+import { Modal, Button } from "react-bootstrap";
 
 export default function ProductContainer() {
-  const params = useParams();
-  console.log("THESE ARE THE PARAMS", params);
-
+  const params = useParams(); // used to get params from the App.js where Route was defined
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProducts());
-  }, []);
 
   const state = useSelector(reduxState => {
     return {
       productState: reduxState.product
     };
   });
-
-  // console.log("--the product state---", state.productState);
 
   return (
     <div className="productcontainer">
