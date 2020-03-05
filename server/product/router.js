@@ -5,8 +5,8 @@ const router = new Router();
 
 router.post("/product", async (request, response, next) => {
   try {
-    console.log("--the PRODUCT form req--", request.body);
-    const productCreate = await Product.create({
+    // console.log("--the PRODUCT form req--", request.body);
+    const productCreated = await Product.create({
       document_name: request.body.documentName,
       name_on_invoice: request.body.nameOnInvoice,
       device_name: request.body.deviceName,
@@ -14,10 +14,11 @@ router.post("/product", async (request, response, next) => {
       warranty_start_date: request.body.warrantyStartDate,
       warranty_end_date: request.body.warrantyEndDate,
       warranty_doc_image: request.body.warrantyDocument,
-      other_image: request.body.miscellaneousImage
+      other_image: request.body.miscellaneousImage,
+      roomId: request.body.roomId
     });
-    // console.log("---Backend pdt created----", productCreate);
-    response.send(productCreate);
+    // console.log("---Backend pdt created----", productCreated);
+    response.send(productCreated);
   } catch (error) {
     next(console.error);
   }
@@ -25,7 +26,10 @@ router.post("/product", async (request, response, next) => {
 
 router.get("/products", async (request, response, next) => {
   try {
-    const productsArray = await Product.findAll();
+    console.log("the room  id-------", request.query);
+    const productsArray = await Product.findAll({
+      where: { roomId: request.query.roomId }
+    });
     response.send(productsArray);
   } catch (error) {
     next(console.error);
