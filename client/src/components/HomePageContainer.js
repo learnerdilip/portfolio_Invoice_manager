@@ -4,7 +4,7 @@ import RoomContainer from "./room/RoomContainer";
 const HomePageContainer = () => {
   return (
     <div className="homepage">
-      <h1>THE HOME PAGE CONTAINER</h1>
+      <h2>Manage your Warranty and Invoices</h2>
       <RoomContainer />
     </div>
   );

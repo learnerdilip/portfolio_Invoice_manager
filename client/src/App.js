@@ -9,11 +9,13 @@ import LoginContainer from "./components/user/LoginContainer";
 import SignupContainer from "./components/user/SignupContainer";
 import ProductContainer from "./components/Product/ProductContainer";
 import DocumentContainer from "./components/document/DocumentContainer";
+import Heading from "./components/Heading";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Provider store={store}>
-      {/* <h1>Header</h1> */}
+      <Heading />
       <Switch>
         <Route exact path="/" component={HomePageContainer} />
         <Route exact path="/login" component={LoginContainer} />
@@ -24,6 +26,7 @@ function App() {
           component={DocumentContainer}
         />
       </Switch>
+      <Footer fixed="bottom" />
     </Provider>
   );
 }

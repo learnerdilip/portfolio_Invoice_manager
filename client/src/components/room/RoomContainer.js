@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRooms } from "../../store/room/action";
 import { updateRoomProduct } from "../../store/product/action";
 import { Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
+import { CardBody } from "react-bootstrap/Card";
 
 export default function RoomContainer(props) {
   const dispatch = useDispatch();
@@ -28,17 +30,22 @@ export default function RoomContainer(props) {
 
   return (
     <div>
-      <h2>The ROOM CONTAINER</h2>
+      <h2>Welcome to your Home!</h2>
       <RoomFormContainer />
-      <div>
+      <div className="theroomslist">
         {state.rooms.length > 0 &&
           state.rooms.map(room => (
-            <Link
-              onClick={() => loadRoomProducts(room.id, room)}
-              to={`/room/${room.room_name}`}
-            >
-              <div className="roomcards">{room.room_name}</div>
-            </Link>
+            <Card className="roomcards">
+              <Card.Body>
+                <Link
+                  onClick={() => loadRoomProducts(room.id, room)}
+                  to={`/room/${room.room_name}`}
+                >
+                  {" "}
+                  <Card.Text>{room.room_name}</Card.Text>
+                </Link>
+              </Card.Body>
+            </Card>
           ))}
       </div>
     </div>

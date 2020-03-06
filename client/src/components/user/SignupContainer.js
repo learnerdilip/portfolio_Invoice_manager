@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sendSignup } from "../../store/user/action";
+import { Form, Button } from "react-bootstrap";
 
 const SignupContainer = () => {
   const dispatch = useDispatch();
@@ -12,9 +13,6 @@ const SignupContainer = () => {
     phone: 0
   });
 
-  // useEffect(() => {
-  //  dispatch(signupData(signupData));
-  // },[])
   const handleChange = e => {
     const { name, value } = e.target;
     setSignupData(prevValue => ({
@@ -26,56 +24,61 @@ const SignupContainer = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(sendSignup(signupData));
+    setSignupData({
+      email: "",
+      password: "",
+      country: "",
+      name: "",
+      phone: 0
+    });
   };
 
-  // const state = useSelector(state => state.userState);
-  // console.log("the state", signupData);
   return (
     <div>
       <h2>Please SignUp here!</h2>
-      <form onSubmit={handleSubmit}>
-        <label>EMAIL</label>
-        <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Label>EMAIL</Form.Label>
+        <Form.Control
           type="email"
           name="email"
           value={signupData.email}
           placeholder="Your email"
           onChange={handleChange}
         />
-        <label>PASSWORD</label>
-        <input
+        <Form.Label>PASSWORD</Form.Label>
+        <Form.Control
           type="text"
           name="password"
           value={signupData.password}
           placeholder="Password"
           onChange={handleChange}
         />
-        <label>NAME</label>
-        <input
+        <Form.Label>NAME</Form.Label>
+        <Form.Control
           type="text"
           name="name"
           value={signupData.name}
           placeholder="Password"
           onChange={handleChange}
         />
-        <label>COUNTRY</label>
-        <input
+        <Form.Label>COUNTRY</Form.Label>
+        <Form.Control
           type="text"
           name="country"
           value={signupData.country}
           placeholder="Password"
           onChange={handleChange}
         />
-        <label>PHONE</label>
-        <input
+        <Form.Label>PHONE</Form.Label>
+        <Form.Control
           type="phone"
           name="phone"
           value={signupData.phone}
           placeholder="Password"
           onChange={handleChange}
         />
-        <button>Submit</button>
-      </form>
+        <Button>Submit</Button>
+      </Form>
     </div>
   );
 };

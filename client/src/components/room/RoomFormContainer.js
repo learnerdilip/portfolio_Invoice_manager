@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createRoom } from "../../store/room/action";
+import { Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default function RoomFormContainer() {
   const dispatch = useDispatch();
@@ -17,17 +19,19 @@ export default function RoomFormContainer() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>ROOM NAME*</label>
-        <input
+    <div className="roomform">
+      <Form onSubmit={handleSubmit}>
+        <Form.Label>ROOM NAME*</Form.Label>
+        <Form.Control
           type="text"
           name="roomName"
           value={roomData.roomName}
           onChange={handleChange}
         />
-        <button type="submit">Enter</button>
-      </form>
+        <Button variant="warning" type="submit">
+          Enter
+        </Button>
+      </Form>
     </div>
   );
 }

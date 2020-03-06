@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { sendLogin } from "../../store/user/action";
+import { Form, Button } from "react-bootstrap";
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
@@ -17,30 +18,34 @@ const LoginContainer = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(sendLogin(loginData));
+    setLoginData({
+      email: "",
+      password: ""
+    });
   };
 
   return (
     <div>
       <h2>Please Login here!</h2>
-      <form onSubmit={handleSubmit}>
-        <label>EMAIL*</label>
-        <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Label>EMAIL*</Form.Label>
+        <Form.Control
           type="email"
           name="email"
           value={setLoginData.email}
           placeholder="Your email"
           onChange={handleChange}
         />
-        <label>PASSWORD*</label>
-        <input
+        <Form.Label>PASSWORD*</Form.Label>
+        <Form.Control
           type="text"
           name="password"
           value={setLoginData.password}
           placeholder="Password"
           onChange={handleChange}
         />
-        <button>Submit</button>
-      </form>
+        <Button>Submit</Button>
+      </Form>
     </div>
   );
 };
