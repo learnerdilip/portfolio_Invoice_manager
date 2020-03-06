@@ -11,6 +11,7 @@ export default function RoomFormContainer() {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(createRoom(roomData));
+    setRoomData({ roomName: "" });
   };
 
   const handleChange = e => {
