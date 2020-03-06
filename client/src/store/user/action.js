@@ -3,7 +3,7 @@ import axios from "axios";
 const baseURL = `http://localhost:4000`;
 
 export const sendSignup = signupData => async dispatch => {
-  // console.log("the signup data ", signupData);
+  console.log("the signup data ", signupData);
   const response = await axios.post(`${baseURL}/signup`, signupData);
   dispatch(usersignedup(response.data));
 };

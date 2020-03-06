@@ -12,6 +12,7 @@ const SignupContainer = () => {
     name: "",
     phone: 0
   });
+  // console.log("the signup state--", signupData);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -23,6 +24,8 @@ const SignupContainer = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log("----sdanasd", signupData);
+
     dispatch(sendSignup(signupData));
     setSignupData({
       email: "",
@@ -37,14 +40,16 @@ const SignupContainer = () => {
     <div>
       <h2>Please SignUp here!</h2>
       <Form onSubmit={handleSubmit}>
-        <Form.Label>EMAIL</Form.Label>
-        <Form.Control
-          type="email"
-          name="email"
-          value={signupData.email}
-          placeholder="Your email"
-          onChange={handleChange}
-        />
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>EMAIL</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            value={signupData.email}
+            placeholder="Your email"
+            onChange={handleChange}
+          />{" "}
+        </Form.Group>
         <Form.Label>PASSWORD</Form.Label>
         <Form.Control
           type="text"
@@ -77,7 +82,7 @@ const SignupContainer = () => {
           placeholder="Password"
           onChange={handleChange}
         />
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
       </Form>
     </div>
   );

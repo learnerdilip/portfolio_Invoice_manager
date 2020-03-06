@@ -70,6 +70,7 @@ p.card-text {
   padding: 1rem;
   margin: 1rem;
   border-radius: 2rem;
+  color: #ffc107;
 }
 
 .thedocumentpage {
@@ -92,7 +93,7 @@ p.card-text {
 .documentdetails {
   text-align: initial;
   margin-bottom: 2rem;
-  background-color: cadetblue;
+  background-color: #ffc107;
   padding: 1rem;
 }
 
@@ -106,6 +107,7 @@ form {
   width: 50%;
   margin: auto;
   min-height: 100vh;
+  padding: 1rem;
 }
 
 button.btn.btn-primary {
