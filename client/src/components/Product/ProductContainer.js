@@ -22,7 +22,15 @@ export default function ProductContainer() {
       <div>
         {state.productState.products.length > 0 &&
           state.productState.products.map(product => (
-            <Link to={`room/${params.room_name}/${product.document_name}`}>
+            <Link
+              to={`room/${params.room_name}/${product.document_name}`}
+              onClick={() => {
+                dispatch({
+                  type: "UPDATE_CURRENT_PRODUCT",
+                  payload: product
+                });
+              }}
+            >
               <div className="productListing">
                 <h4>{product.device_name}</h4>
                 <h6>{product.warranty_start_date}</h6>
