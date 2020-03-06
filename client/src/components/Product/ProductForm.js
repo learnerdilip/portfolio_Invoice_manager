@@ -10,10 +10,6 @@ export default function ProductForm() {
       roomState: reduxState.room
     };
   });
-  console.log(
-    "---looking for roomId THROUGHT STATE---",
-    state.roomState.currentRoom
-  );
 
   const [productData, setProductData] = useState({
     documentName: "",
@@ -57,8 +53,6 @@ export default function ProductForm() {
       return { ...prevState, [name]: value };
     });
   };
-
-  // console.log("-----the State-------", productData);
 
   return (
     <div className="userform">

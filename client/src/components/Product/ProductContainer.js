@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ProductFormContainer from "./ProductFormContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
+// import { Modal, Button } from "react-bootstrap";
 
 export default function ProductContainer() {
   const params = useParams(); // used to get params from the App.js where Route was defined
@@ -22,7 +22,7 @@ export default function ProductContainer() {
       <div>
         {state.productState.products.length > 0 &&
           state.productState.products.map(product => (
-            <Link to={`/${params.room_name}/${product.document_name}`}>
+            <Link to={`room/${params.room_name}/${product.document_name}`}>
               <div className="productListing">
                 <h4>{product.device_name}</h4>
                 <h6>{product.warranty_start_date}</h6>

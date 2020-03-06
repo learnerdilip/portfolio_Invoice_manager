@@ -1,9 +1,9 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 export default function DocumentContainer() {
-  const params = useParams();
-  console.log("params in doc comp", params);
+  // const params = useParams();
+  // console.log("params in doc comp", params);
 
   return (
     <div>

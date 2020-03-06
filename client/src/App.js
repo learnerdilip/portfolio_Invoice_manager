@@ -19,7 +19,6 @@ function App() {
         <Route exact path="/signup" component={SignupContainer} />
         <Route exact path="/room/:room_name" component={ProductContainer} />
         <Route
-          exact
           path="/room/:room_name/:document_name"
           component={DocumentContainer}
         />
