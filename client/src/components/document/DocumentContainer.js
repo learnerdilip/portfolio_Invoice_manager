@@ -17,27 +17,35 @@ export default function DocumentContainer() {
   );
 
   return (
-    <div>
-      <h2>The Document Details</h2>
-      <h5>
-        THE NAME OF DOCUMENT: {state.productState.currentProduct.document_name}
-      </h5>
-      <h5>
-        NAME ON INVOICE: {state.productState.currentProduct.name_on_invoice}{" "}
-      </h5>
-      <h5>DEVICE NAME: {state.productState.currentProduct.device_name} </h5>
-      <h5>PURCHASE DATE: {state.productState.currentProduct.purchase_date} </h5>
-      <h5>
-        WARRANTY START DATE:{" "}
-        {state.productState.currentProduct.warranty_start_date}{" "}
-      </h5>
-      <h5>
-        WARRANTY END DATE: {state.productState.currentProduct.warranty_end_date}{" "}
-      </h5>
-      <img
-        src={state.productState.currentProduct.warranty_doc_image}
-        alt={`the ${state.productState.currentProduct.device_name} document`}
-      />
+    <div className="thedocumentpage">
+      <div className="documentdetails">
+        <h2>The Document Details</h2>
+        <h5>
+          THE NAME OF DOCUMENT:{" "}
+          {state.productState.currentProduct.document_name}
+        </h5>
+        <h5>
+          NAME ON INVOICE: {state.productState.currentProduct.name_on_invoice}{" "}
+        </h5>
+        <h5>DEVICE NAME: {state.productState.currentProduct.device_name} </h5>
+        <h5>
+          PURCHASE DATE: {state.productState.currentProduct.purchase_date}{" "}
+        </h5>
+        <h5>
+          WARRANTY START DATE:{" "}
+          {state.productState.currentProduct.warranty_start_date}{" "}
+        </h5>
+        <h5>
+          WARRANTY END DATE:{" "}
+          {state.productState.currentProduct.warranty_end_date}{" "}
+        </h5>
+      </div>
+      <div className="docwarrantyimage">
+        <img
+          src={state.productState.currentProduct.warranty_doc_image}
+          alt={`the ${state.productState.currentProduct.device_name} document`}
+        />
+      </div>
     </div>
   );
 }
