@@ -1,9 +1,10 @@
 const { Router } = require("express");
 const Product = require("./model");
+const auth = require("../auth/middleWare");
 
 const router = new Router();
 
-router.post("/product", async (request, response, next) => {
+router.post("/product", auth, async (request, response, next) => {
   try {
     // console.log("--the PRODUCT form req--", request.body);
     const productCreated = await Product.create({
@@ -24,7 +25,7 @@ router.post("/product", async (request, response, next) => {
   }
 });
 
-router.get("/products", async (request, response, next) => {
+router.get("/products", auth, async (request, response, next) => {
   try {
     console.log("the room  id-------", request.query);
     const productsArray = await Product.findAll({

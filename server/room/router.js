@@ -1,13 +1,14 @@
 const { Router } = require("express");
 const Room = require("./model");
+const auth = require("../auth/middleWare");
 
 const router = new Router();
 
-router.post("/room", async (request, response, next) => {
+router.post("/room", auth, async (request, response, next) => {
   try {
-    console.log("---the request body of rrom post --", request.body);
     const createdRoom = await Room.create({
-      room_name: request.body.roomName
+      room_name: request.body.roomName,
+      userId: request.user.id
     });
     response.send(createdRoom);
   } catch {
@@ -15,9 +16,11 @@ router.post("/room", async (request, response, next) => {
   }
 });
 
-router.get("/rooms", async (request, response, next) => {
+router.get("/rooms", auth, async (request, response, next) => {
   try {
-    const fetchedRooms = await Room.findAll();
+    const fetchedRooms = await Room.findAll({
+      where: { userId: request.user.id }
+    });
     response.send(fetchedRooms);
   } catch {
     error => next(error);
