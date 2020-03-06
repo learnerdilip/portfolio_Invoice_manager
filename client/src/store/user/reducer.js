@@ -17,6 +17,9 @@ export default function userReducer(state = initialState, action = {}) {
     case "USER_SIGNEDUP": {
       return { ...state, newUser: true };
     }
+    case "CLEAR_USER_DATA": {
+      return { ...initialState };
+    }
     default: {
       return { ...state };
     }

@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sendLogin } from "../../store/user/action";
 import { Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
     email: "",
     password: ""
+  });
+
+  const state = useSelector(reduxState => {
+    return {
+      userState: reduxState.user
+    };
   });
 
   const handleChange = e => {
@@ -24,6 +31,13 @@ const LoginContainer = () => {
     });
   };
 
+  if (state.userState.token)
+    return (
+      <div className="loginhomeredirect">
+        <h2>Welcome, You are Logged in!</h2>
+        <Link to="/">GO TO HOME</Link>
+      </div>
+    );
   return (
     <div>
       <h2>Please Login here!</h2>
@@ -44,7 +58,7 @@ const LoginContainer = () => {
           placeholder="Password"
           onChange={handleChange}
         />
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
       </Form>
     </div>
   );

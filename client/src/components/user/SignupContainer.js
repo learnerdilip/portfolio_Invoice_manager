@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sendSignup } from "../../store/user/action";
 import { Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const SignupContainer = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,11 @@ const SignupContainer = () => {
   });
   // console.log("the signup state--", signupData);
 
+  const state = useSelector(reduxState => {
+    return {
+      userState: reduxState.user
+    };
+  });
   const handleChange = e => {
     const { name, value } = e.target;
     setSignupData(prevValue => ({
@@ -24,8 +30,6 @@ const SignupContainer = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("----sdanasd", signupData);
-
     dispatch(sendSignup(signupData));
     setSignupData({
       email: "",
@@ -36,6 +40,15 @@ const SignupContainer = () => {
     });
   };
 
+  if (state.userState.newUser)
+    return (
+      <div className="loginhomeredirect">
+        <h2>You are registered now!</h2>
+        <Link to="/">GO TO HOME</Link>
+        <br />
+        <Link to="/login">GO TO LOGIN</Link>
+      </div>
+    );
   return (
     <div>
       <h2>Please SignUp here!</h2>
