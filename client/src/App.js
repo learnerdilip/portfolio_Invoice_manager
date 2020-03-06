@@ -8,6 +8,7 @@ import HomePageContainer from "./components/HomePageContainer";
 import LoginContainer from "./components/user/LoginContainer";
 import SignupContainer from "./components/user/SignupContainer";
 import ProductContainer from "./components/Product/ProductContainer";
+import DocumentContainer from "./components/document/DocumentContainer";
 
 function App() {
   return (
@@ -17,6 +18,11 @@ function App() {
         <Route exact path="/login" component={LoginContainer} />
         <Route exact path="/signup" component={SignupContainer} />
         <Route exact path="/room/:room_name" component={ProductContainer} />
+        <Route
+          exact
+          path="/room/:room_name/:document_name"
+          component={DocumentContainer}
+        />
       </Switch>
     </Provider>
   );
