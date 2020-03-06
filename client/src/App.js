@@ -13,6 +13,7 @@ import DocumentContainer from "./components/document/DocumentContainer";
 function App() {
   return (
     <Provider store={store}>
+      {/* <h1>Header</h1> */}
       <Switch>
         <Route exact path="/" component={HomePageContainer} />
         <Route exact path="/login" component={LoginContainer} />
