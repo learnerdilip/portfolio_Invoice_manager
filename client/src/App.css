@@ -12,3 +12,10 @@
   text-align: center;
   background-color: slategray;
 }
+
+.productListing {
+  border: solid;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 2rem;
+}
