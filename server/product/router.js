@@ -18,7 +18,6 @@ router.post("/product", async (request, response, next) => {
       other_image: request.body.miscellaneousImage,
       roomId: request.body.roomId
     });
-    // console.log("---Backend pdt created----", productCreated);
     response.send(productCreated);
   } catch (error) {
     next(console.error);
@@ -27,11 +26,9 @@ router.post("/product", async (request, response, next) => {
 
 router.get("/products", async (request, response, next) => {
   try {
-    // console.log("the room  id-------", request.query);
     const productsArray = await Product.findAll({
       where: { roomId: request.query.roomId }
     });
-    // console.log("-response sent----## -----", response);
     response.send(productsArray, response);
   } catch (error) {
     next(console.error);
