@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { deleteProduct } from "../../store/product/action";
+import { Alert } from "react-bootstrap";
 
 export default function ProductContainer() {
   const params = useParams(); // used to get params from the App.js where Route was defined
@@ -18,12 +19,20 @@ export default function ProductContainer() {
   });
 
   const handleDelete = productId => {
-    console.log("the product to be deleted:", productId);
-    dispatch(deleteProduct(productId));
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete productID: ${productId}`
+    );
+    if (confirmDelete) {
+      dispatch(deleteProduct(productId));
+    }
   };
 
   const handleEdit = productId => {
     console.log("the pdt to edit----", productId);
+    const confirmEdit = window.confirm("You are about to Edit");
+    if (confirmEdit) {
+      //
+    }
   };
 
   return (
