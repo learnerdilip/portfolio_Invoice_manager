@@ -5,6 +5,10 @@
   color: aliceblue;
 }
 
+img {
+  max-width: 100%;
+}
+
 .navbar-light .navbar-brand {
   color: rgba(0, 0, 0, 0.9);
   width: 80%;
@@ -121,4 +125,36 @@ button.btn.btn-primary {
 
 .loginhomeredirect {
   text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .productcontainer {
+    width: 100%;
+    padding: 1rem;
+    border: double 1px;
+  }
+  .homepage {
+    width: 100%;
+    margin: auto;
+    padding: 1rem;
+    box-shadow: grey -2px -20px 20px 14px;
+    text-align: center;
+  }
+  form {
+    width: 90%;
+    min-height: 100vh;
+    padding: 1rem;
+  }
+  .thedocumentpage {
+    width: 100%;
+    padding: 1rem;
+    box-shadow: 2px 7px 20px grey;
+    text-align: center;
+    margin-top: 1rem;
+    min-height: 95vh;
+  }
+  .roomcards {
+    display: inline-block;
+    width: 80%;
+  }
 }
