@@ -2,7 +2,7 @@ const { Router } = require("express");
 const User = require("../user/model");
 const bcrypt = require("bcrypt");
 const { toJWT } = require("../auth/jwt");
-const nodemailer = require("nodemailer");
+const sendMail = require("../sendMail");
 
 const router = new Router();
 
@@ -19,30 +19,7 @@ router.post("/signup", (request, response, next) => {
   User.create(user)
     .then(user => {
       response.send(user);
-      //sending mails
-      var transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "paladinistormentor@gmail.com",
-          pass: "paladin#1"
-        }
-      });
-
-      var mailOptions = {
-        from: "paladinistormentor@gmail.com",
-        to: user.email,
-        subject: "Thank you for signing up on Invoice Manager created by Dilip",
-        text:
-          "Thank you for signing up, you can now manage your warranty documents for your home appliances very easily"
-      };
-
-      transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email sent: " + info.response);
-        }
-      });
+      sendMail(user.email); //sending mails
     })
     .catch(e => {
       // console.log(JSON.stringify(e.errors[0].message, null, 2));

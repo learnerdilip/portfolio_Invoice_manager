@@ -4,9 +4,9 @@ const auth = require("../auth/middleWare");
 
 const router = new Router();
 
-router.post("/product", auth, async (request, response, next) => {
+router.post("/product", async (request, response, next) => {
   try {
-    // console.log("--the PRODUCT form req--", request.body);
+    console.log("--the PRODUCT form req--", request.body);
     const productCreated = await Product.create({
       document_name: request.body.documentName,
       name_on_invoice: request.body.nameOnInvoice,
@@ -25,13 +25,14 @@ router.post("/product", auth, async (request, response, next) => {
   }
 });
 
-router.get("/products", auth, async (request, response, next) => {
+router.get("/products", async (request, response, next) => {
   try {
-    console.log("the room  id-------", request.query);
+    // console.log("the room  id-------", request.query);
     const productsArray = await Product.findAll({
       where: { roomId: request.query.roomId }
     });
-    response.send(productsArray);
+    // console.log("-response sent----## -----", response);
+    response.send(productsArray, response);
   } catch (error) {
     next(console.error);
   }
