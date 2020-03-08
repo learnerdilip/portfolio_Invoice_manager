@@ -6,7 +6,7 @@ const router = new Router();
 
 router.post("/product", async (request, response, next) => {
   try {
-    console.log("--the PRODUCT form req--", request.body);
+    // console.log("--the PRODUCT form req--", request.body);
     const productCreated = await Product.create({
       document_name: request.body.documentName,
       name_on_invoice: request.body.nameOnInvoice,
@@ -29,7 +29,17 @@ router.get("/products", async (request, response, next) => {
     const productsArray = await Product.findAll({
       where: { roomId: request.query.roomId }
     });
-    response.send(productsArray, response);
+    response.send(productsArray);
+  } catch (error) {
+    next(console.error);
+  }
+});
+
+router.delete("/product", async (request, response, next) => {
+  try {
+    const productToRemove = await Product.findByPk(request.query.productId);
+    const deleteProd = await productToRemove.destroy();
+    response.send(productToRemove);
   } catch (error) {
     next(console.error);
   }

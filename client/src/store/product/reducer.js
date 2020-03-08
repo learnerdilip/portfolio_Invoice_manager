@@ -14,6 +14,13 @@ const productReducer = (state = initialState, action = {}) => {
     case "CLEAR_USER_DATA": {
       return { ...initialState };
     }
+    case "UPDATE_DELETED_PRODUCT": {
+      const data = action.payload;
+      const updatedList = [...state.products].filter(
+        product => product.id !== data.id
+      );
+      return { ...state, products: updatedList };
+    }
     default: {
       return { ...state };
     }

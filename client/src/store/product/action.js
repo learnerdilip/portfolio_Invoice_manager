@@ -23,3 +23,17 @@ const productsFetched = data => {
     payload: data
   };
 };
+
+export const deleteProduct = productId => async dispatch => {
+  const response = await axios.delete(
+    `${baseUrl}/product?productId=${productId}`
+  );
+  console.log("--the delete respose-----", response.data);
+  dispatch(updateDeletedProduct(response.data));
+};
+const updateDeletedProduct = data => {
+  return {
+    type: "UPDATE_DELETED_PRODUCT",
+    payload: data
+  };
+};
