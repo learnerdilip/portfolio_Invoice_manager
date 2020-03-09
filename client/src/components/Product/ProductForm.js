@@ -4,6 +4,7 @@ import { createProduct } from "../../store/product/action";
 import { Form } from "react-bootstrap";
 
 export default function ProductForm() {
+  // console.log("the editable data", props.data);
   const dispatch = useDispatch();
   const state = useSelector(reduxState => {
     return {
@@ -33,7 +34,7 @@ export default function ProductForm() {
 
   const handleFileSelect = async e => {
     setLoading(true);
-    const { name } = e.target; // deconstructing the name as it should work for both images
+    const { name } = e.target; // deconstructing the name as it should work for both
     console.log("---the e", name);
     const files = e.target.files;
     const data = new FormData();

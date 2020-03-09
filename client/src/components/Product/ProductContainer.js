@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { deleteProduct } from "../../store/product/action";
 import ProductForm from "./ProductForm";
+import ProductForm1 from "./ProductFrom1";
 import Moment from "react-moment";
 
 export default function ProductContainer() {
@@ -18,6 +19,7 @@ export default function ProductContainer() {
   });
 
   const [form, setForm] = useState(false);
+  const [editData, setEditData] = useState(null);
 
   const seeForm = () => {
     setForm(!form);
@@ -33,9 +35,14 @@ export default function ProductContainer() {
   };
 
   const handleEdit = async productId => {
-    const confirmEdit = window.confirm("You are about to Edit");
+    const confirmEdit = await window.confirm("You are about to Edit");
     if (confirmEdit) {
-      // console.log("----product in state--", state.productState.currentProduct);
+      const pdtTochange = state.productState.products.filter(
+        prod => prod.id === productId
+      );
+      // console.log("---the pdt to change---", pdtTochange[0]);
+      const editableItem = pdtTochange[0];
+      setEditData(editableItem);
     }
   };
 
@@ -59,7 +66,7 @@ export default function ProductContainer() {
                   x
                 </Button>
                 <Button
-                  onClick={async () => {
+                  onClick={() => {
                     dispatch({
                       type: "UPDATE_CURRENT_PRODUCT",
                       payload: product
@@ -77,10 +84,12 @@ export default function ProductContainer() {
                 <div>WARRANTY END DATE:</div>
                 <Moment format="YYYY-MM-DD">{product.warranty_end_date}</Moment>
                 <h5 className="warrantydays">{`Your warranty will expire in ${product.daysRemaining} Days`}</h5>
+                <progress></progress>
+                <br />
                 <Button>
                   <Link
                     to={`room/${params.room_name}/${product.document_name}`}
-                    onClick={async () => {
+                    onClick={() => {
                       dispatch({
                         type: "UPDATE_CURRENT_PRODUCT",
                         payload: product
@@ -97,7 +106,8 @@ export default function ProductContainer() {
       <Button className="addButton" onClick={() => seeForm()}>
         +
       </Button>
-      {form && <ProductForm data={state.productState.currentProduct} />}
+      {editData && <ProductForm1 data={editData} />}
+      {form && <ProductForm />}
     </div>
   );
 }
