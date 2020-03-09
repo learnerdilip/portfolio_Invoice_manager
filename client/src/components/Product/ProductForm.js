@@ -11,7 +11,7 @@ export default function ProductForm() {
     };
   });
 
-  const [productData, setProductData] = useState({
+  const initialState = {
     documentName: "",
     nameOnInvoice: "",
     deviceName: "",
@@ -21,16 +21,20 @@ export default function ProductForm() {
     warrantyDocument: "",
     miscellaneousImage: "",
     roomId: state.roomState.currentRoom.id
-  });
+  };
+  const [productData, setProductData] = useState(initialState);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(createProduct(productData));
+    setProductData(initialState);
   };
 
   const handleFileSelect = async e => {
     setLoading(true);
+    const { name } = e.target;
+    console.log("---the e", name);
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -40,8 +44,9 @@ export default function ProductForm() {
       { method: "POST", body: data }
     );
     const file = await res.json();
+
     setProductData(prevState => {
-      return { ...prevState, warrantyDocument: file.url };
+      return { ...prevState, [name]: file.url };
     });
     // productData.warrantyDocument(file.url);
     setLoading(false);
@@ -111,13 +116,17 @@ export default function ProductForm() {
         <Form.Label>warranty Document Image to be stored *</Form.Label>
         <Form.Control
           type="file"
-          name="warranty_document_image"
+          name="warrantyDocument"
           onChange={handleFileSelect}
         />{" "}
         <br />
         {loading && <h5>Loading...</h5>}
         <Form.Label>Any other associated image</Form.Label>
-        <Form.Control type="file" name="other_image" />
+        <Form.Control
+          type="file"
+          onChange={handleFileSelect}
+          name="miscellaneousImage"
+        />
         <br />
         <button type="submit">SUBMIT</button>
       </Form>

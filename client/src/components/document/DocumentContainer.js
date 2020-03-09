@@ -11,11 +11,6 @@ export default function DocumentContainer() {
     };
   });
 
-  console.log(
-    "---the satet in documnet contr",
-    state.productState.currentProduct
-  );
-
   return (
     <div className="thedocumentpage">
       <div className="documentdetails">
