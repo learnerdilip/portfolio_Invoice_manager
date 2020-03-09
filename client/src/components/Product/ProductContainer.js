@@ -72,6 +72,7 @@ export default function ProductContainer() {
                 <h4>{product.device_name}</h4>
                 <h6>{product.warranty_start_date}</h6>
                 <h6>{product.warranty_end_date}</h6>
+                <h5 className="warrantydays">{`Your warranty will expire in ${product.daysRemaining} Days`}</h5>
                 <Button>
                   <Link
                     to={`room/${params.room_name}/${product.document_name}`}

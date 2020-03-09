@@ -33,7 +33,7 @@ export default function ProductForm() {
 
   const handleFileSelect = async e => {
     setLoading(true);
-    const { name } = e.target;
+    const { name } = e.target; // deconstructing the name as it should work for both images
     console.log("---the e", name);
     const files = e.target.files;
     const data = new FormData();

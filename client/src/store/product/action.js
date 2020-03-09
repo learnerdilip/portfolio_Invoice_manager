@@ -15,6 +15,7 @@ const productCreated = data => {
 
 export const updateRoomProduct = roomId => async dispatch => {
   const response = await axios.get(`${baseUrl}/products?roomId=${roomId}`);
+  // console.log("the products received-----", response);
   dispatch(productsFetched(response.data));
 };
 const productsFetched = data => {
@@ -28,7 +29,7 @@ export const deleteProduct = productId => async dispatch => {
   const response = await axios.delete(
     `${baseUrl}/product?productId=${productId}`
   );
-  console.log("--the delete respose-----", response.data);
+  // console.log("--the delete respose-----", response.data);
   dispatch(updateDeletedProduct(response.data));
 };
 const updateDeletedProduct = data => {

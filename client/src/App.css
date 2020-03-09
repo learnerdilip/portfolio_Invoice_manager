@@ -136,6 +136,10 @@ input.form-control {
   border-radius: 2rem;
 }
 
+.warrantydays {
+  color: rgb(185, 30, 19);
+}
+
 @media only screen and (max-width: 600px) {
   .productcontainer {
     width: 100%;
