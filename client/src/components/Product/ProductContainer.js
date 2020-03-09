@@ -5,7 +5,6 @@ import { Button } from "react-bootstrap";
 import { deleteProduct } from "../../store/product/action";
 import ProductForm from "./ProductForm";
 import ProductForm1 from "./ProductFrom1";
-import Moment from "react-moment";
 
 export default function ProductContainer() {
   const params = useParams(); // used to get params from the App.js where Route was defined
@@ -77,12 +76,15 @@ export default function ProductContainer() {
                   EDIT
                 </Button>
                 <h4>{product.device_name}</h4>
-                <div className="productdatetext">WARRANTY START DATE:</div>
-                <Moment format="YYYY-MM-DD">
-                  {product.warranty_start_date}
-                </Moment>
-                <div>WARRANTY END DATE:</div>
-                <Moment format="YYYY-MM-DD">{product.warranty_end_date}</Moment>
+                <div className="productdatetext"></div>
+                <div>
+                  WARRANTY START DATE:
+                  {product.warranty_start_date.substring(0, 10)}
+                </div>
+                <div>
+                  WARRANTY END DATE:
+                  {product.warranty_end_date.substring(0, 10)}
+                </div>
                 <h5 className="warrantydays">{`Your warranty will expire in ${product.daysRemaining} Days`}</h5>
                 <progress></progress>
                 <br />
