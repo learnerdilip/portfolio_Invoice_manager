@@ -20,7 +20,9 @@ router.post("/product", async (request, response, next) => {
       other_image: request.body.miscellaneousImage,
       roomId: request.body.roomId
     });
-    response.send(productCreated);
+    //calculating number of days while creation
+    const item = findRemainingDays(productCreated);
+    response.send(item);
   } catch (error) {
     next(console.error);
   }
@@ -34,11 +36,7 @@ router.get("/products", async (request, response, next) => {
 
     //calculating number of days remaining
     const newArr = productsArray.map(prod => {
-      const item = prod.dataValues;
-      var een = moment(prod.dataValues.warranty_end_date);
-      var twee = new Date();
-      var duration = moment.duration(een.diff(twee));
-      item.daysRemaining = Math.floor(duration.as("days"));
+      const item = findRemainingDays(prod);
       return item;
     });
     //console.log("the pdt arr = ", newArr);
@@ -62,5 +60,14 @@ router.delete("/product", async (request, response, next) => {
 // cron.schedule("* * * * *", function() {
 //   console.log("running a task every minute");
 // });
+
+const findRemainingDays = product => {
+  const item = product.dataValues;
+  var een = moment(item.warranty_end_date);
+  var twee = new Date();
+  var duration = moment.duration(een.diff(twee));
+  item.daysRemaining = Math.floor(duration.as("days"));
+  return item; //a item with days remaining property
+};
 
 module.exports = router;

@@ -4,11 +4,11 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { deleteProduct } from "../../store/product/action";
 import ProductForm from "./ProductForm";
+import Moment from "react-moment";
 
 export default function ProductContainer() {
   const params = useParams(); // used to get params from the App.js where Route was defined
   // console.log("the params", params);
-
   const dispatch = useDispatch();
 
   const state = useSelector(reduxState => {
@@ -70,8 +70,12 @@ export default function ProductContainer() {
                   EDIT
                 </Button>
                 <h4>{product.device_name}</h4>
-                <h6>{product.warranty_start_date}</h6>
-                <h6>{product.warranty_end_date}</h6>
+                <div className="productdatetext">WARRANTY START DATE:</div>
+                <Moment format="YYYY-MM-DD">
+                  {product.warranty_start_date}
+                </Moment>
+                <div>WARRANTY END DATE:</div>
+                <Moment format="YYYY-MM-DD">{product.warranty_end_date}</Moment>
                 <h5 className="warrantydays">{`Your warranty will expire in ${product.daysRemaining} Days`}</h5>
                 <Button>
                   <Link
