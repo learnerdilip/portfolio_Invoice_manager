@@ -10,8 +10,12 @@ export default function RoomFormContainer() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(createRoom(roomData));
-    setRoomData({ roomName: "" });
+    if (roomData.roomName === "") {
+      alert("Room name is empty, please provide some value");
+    } else {
+      dispatch(createRoom(roomData));
+      setRoomData({ roomName: "" });
+    }
   };
 
   const handleChange = e => {
@@ -29,8 +33,9 @@ export default function RoomFormContainer() {
           value={roomData.roomName}
           onChange={handleChange}
         />
+        <br />
         <Button variant="warning" type="submit">
-          Enter
+          Make a Room
         </Button>
       </Form>
     </div>

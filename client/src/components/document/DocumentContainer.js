@@ -46,6 +46,14 @@ export default function DocumentContainer() {
           alt={`the ${state.productState.currentProduct.device_name} document`}
         />
       </div>
+      {state.productState.currentProduct.other_image && (
+        <div className="docwarrantyimage">
+          <img
+            src={state.productState.currentProduct.other_image}
+            alt={`the ${state.productState.currentProduct.device_name} document`}
+          />
+        </div>
+      )}
     </div>
   );
 }

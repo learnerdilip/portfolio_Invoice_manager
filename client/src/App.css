@@ -31,6 +31,7 @@ nav.navbar.navbar-expand.navbar-light.bg-primary {
   padding: 1rem;
   border: double 4px;
   margin: auto;
+  min-height: 100vh;
 }
 
 .homepage {
@@ -41,6 +42,7 @@ nav.navbar.navbar-expand.navbar-light.bg-primary {
   padding: 1rem;
   box-shadow: grey -2px -20px 20px 14px;
   text-align: center;
+  min-height: 100vh;
 }
 
 .theroomslist {
@@ -108,10 +110,13 @@ h2 {
 }
 
 form {
-  width: 50%;
+  width: 60%;
   margin: auto;
-  min-height: 100vh;
   padding: 1rem;
+}
+
+.addButton {
+  border-radius: 50%;
 }
 
 button.btn.btn-primary {
@@ -125,6 +130,10 @@ button.btn.btn-primary {
 
 .loginhomeredirect {
   text-align: center;
+}
+
+input.form-control {
+  border-radius: 2rem;
 }
 
 @media only screen and (max-width: 600px) {
