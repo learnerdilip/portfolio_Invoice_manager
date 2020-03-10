@@ -80,16 +80,17 @@ export default function ProductContainer() {
                 <div className="productdatetext"></div>
                 <div>
                   WARRANTY START DATE:
-                  {product.warranty_start_date.substring(0, 10)}
+                  {moment(product.warranty_start_date).format("MMMM Do YYYY")}
                 </div>
                 <div>
                   WARRANTY END DATE:
-                  {moment(product.warranty_end_date).format(
-                    "dddd, MMMM Do YYYY"
-                  )}
+                  {moment(product.warranty_end_date).format("MMMM Do YYYY")}
                 </div>
-                <h5 className="warrantydays">{`Your warranty will expire in ${product.daysRemaining} Days`}</h5>
-                <progress></progress>
+                <h5 className="warrantydays">{`Your warranty will expire in ${product.WarrantyDaysLeft} Days`}</h5>
+                <progress
+                  max={product.totalwarrantydays}
+                  value={product.WarrantyDaysLeft}
+                ></progress>
                 <br />
                 <Button>
                   <Link
