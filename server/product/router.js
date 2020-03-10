@@ -55,20 +55,12 @@ router.get("/products", async (request, response, next) => {
     const productsArray = await Product.findAll({
       where: { roomId: request.query.roomId }
     });
-    // const newProdArr = await productsArray.map(async item => {
-    //   const mailingItem = await MailingList.findOne({
-    //     where: { product_id: newItem.id }
-    //   });
-    //   // console.log("--checking the new prod fn wit mailingItem", mailingItem);
-    //   item.dataValues["totalwarrantydays"] =
-    //     mailingItem.dataValues.total_warranty;
-    //   item.dataValues["remainingWarrantyDays"] =
-    //     mailingItem.dataValues.remaining_warranty;
-    //   newArr.push(newItem);
-    //   console.log("---NEW ITEM-------", item);
-    //   return item;
-    // });
-    // console.log("--------FINAL---NEW ARR----------------------:", newProdArr);
+    const addDaytoProd = [...productsArray].map(prod => {
+      prod.dataValues.totalWarrantyDays = findTotalDays(prod);
+      prod.dataValues.WarrantyDaysLeft = findRemainingDays(prod);
+      return prod;
+    });
+    // console.log("------the adjusted Arr-------", addDaytoProd);
     response.send(productsArray);
   } catch (error) {
     next(console.error);
