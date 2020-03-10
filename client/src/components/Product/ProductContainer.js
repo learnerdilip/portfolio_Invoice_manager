@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { deleteProduct } from "../../store/product/action";
 import ProductForm from "./ProductForm";
+import moment from "moment";
 import ProductEditForm from "./ProductEditForm";
 
 export default function ProductContainer() {
@@ -83,7 +84,9 @@ export default function ProductContainer() {
                 </div>
                 <div>
                   WARRANTY END DATE:
-                  {product.warranty_end_date.substring(0, 10)}
+                  {moment(product.warranty_end_date).format(
+                    "dddd, MMMM Do YYYY"
+                  )}
                 </div>
                 <h5 className="warrantydays">{`Your warranty will expire in ${product.daysRemaining} Days`}</h5>
                 <progress></progress>

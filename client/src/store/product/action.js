@@ -19,7 +19,7 @@ const productCreated = data => {
 
 export const updateRoomProduct = roomId => async dispatch => {
   const response = await axios.get(`${baseUrl}/products?roomId=${roomId}`);
-  // console.log("the products received-----", response);
+  console.log("the products received-----", response);
   dispatch(productsFetched(response.data));
 };
 const productsFetched = data => {

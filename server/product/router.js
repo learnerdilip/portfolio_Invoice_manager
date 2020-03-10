@@ -21,6 +21,7 @@ router.post("/product", auth, async (request, response, next) => {
       other_image: request.body.miscellaneousImage,
       roomId: request.body.roomId
     });
+
     //adding to the mailnig list
     const userEmail = request.user.dataValues.email; //find user email
     const addToMailing = await MailingList.create({
@@ -29,8 +30,21 @@ router.post("/product", auth, async (request, response, next) => {
       total_warranty: findTotalDays(productCreated),
       remaining_warranty: findRemainingDays(productCreated)
     });
-    // console.log("the addtomailining--------", addToMailing);
-    response.send(productCreated);
+
+    const ChangedProd = productCreated;
+
+    const daysFind = await MailingList.findOne({
+      where: {
+        product_id: ChangedProd.dataValues.id
+      }
+    });
+
+    ChangedProd.dataValues.totalwarrantydays =
+      daysFind.dataValues.total_warranty;
+    ChangedProd.dataValues.remianingWarrantyDays =
+      daysFind.dataValues.remaining_warranty;
+
+    response.send(ChangedProd);
   } catch (error) {
     next(console.error);
   }
@@ -41,6 +55,20 @@ router.get("/products", async (request, response, next) => {
     const productsArray = await Product.findAll({
       where: { roomId: request.query.roomId }
     });
+    // const newProdArr = await productsArray.map(async item => {
+    //   const mailingItem = await MailingList.findOne({
+    //     where: { product_id: newItem.id }
+    //   });
+    //   // console.log("--checking the new prod fn wit mailingItem", mailingItem);
+    //   item.dataValues["totalwarrantydays"] =
+    //     mailingItem.dataValues.total_warranty;
+    //   item.dataValues["remainingWarrantyDays"] =
+    //     mailingItem.dataValues.remaining_warranty;
+    //   newArr.push(newItem);
+    //   console.log("---NEW ITEM-------", item);
+    //   return item;
+    // });
+    // console.log("--------FINAL---NEW ARR----------------------:", newProdArr);
     response.send(productsArray);
   } catch (error) {
     next(console.error);
