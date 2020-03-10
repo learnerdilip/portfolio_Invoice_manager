@@ -2,8 +2,12 @@ import axios from "axios";
 
 const baseUrl = `http://localhost:4000`;
 
-export const createProduct = productFormData => async dispatch => {
-  const response = await axios.post(`${baseUrl}/product`, productFormData);
+export const createProduct = productFormData => async (dispatch, getState) => {
+  const userToken = getState().user.token;
+  const config = { Authorization: `Bearer ${userToken}` };
+  const response = await axios.post(`${baseUrl}/product`, productFormData, {
+    headers: config
+  });
   dispatch(productCreated(response.data));
 };
 const productCreated = data => {
@@ -37,4 +41,14 @@ const updateDeletedProduct = data => {
     type: "UPDATE_DELETED_PRODUCT",
     payload: data
   };
+};
+
+export const updateProductDetails = productEdit => async dispatch => {
+  // console.log("the  data to be edited", productEdit);
+  const response = await axios.put(`${baseUrl}/product`, productEdit);
+  console.log("the response aftger edit", response.data);
+  dispatch({
+    type: "UPDATE_EDIT_PRODUCT",
+    payload: response.data
+  });
 };

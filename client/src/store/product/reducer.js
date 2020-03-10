@@ -21,6 +21,12 @@ const productReducer = (state = initialState, action = {}) => {
       );
       return { ...state, products: updatedList };
     }
+    case "UPDATE_EDIT_PRODUCT": {
+      const removeOldEdit = [...state.products].filter(
+        prod => prod.id !== action.payload.id
+      );
+      return { ...state, products: [...removeOldEdit, action.payload] };
+    }
     default: {
       return { ...state };
     }

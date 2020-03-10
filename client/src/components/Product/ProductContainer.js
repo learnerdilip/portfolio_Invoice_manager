@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { deleteProduct } from "../../store/product/action";
 import ProductForm from "./ProductForm";
-import ProductForm1 from "./ProductFrom1";
+import ProductEditForm from "./ProductEditForm";
 
 export default function ProductContainer() {
   const params = useParams(); // used to get params from the App.js where Route was defined
@@ -108,7 +108,7 @@ export default function ProductContainer() {
       <Button className="addButton" onClick={() => seeForm()}>
         +
       </Button>
-      {editData && <ProductForm1 data={editData} />}
+      {editData && <ProductEditForm data={editData} />}
       {form && <ProductForm />}
     </div>
   );
