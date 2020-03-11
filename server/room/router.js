@@ -23,14 +23,14 @@ router.get("/rooms", auth, async (request, response, next) => {
       where: { userId: request.user.id }
     });
     //add the products close to expiry here
-    const ExpiringWarranty = await MailingList.findAll({
-      where: { email_id: request.user.email }
-    });
-    const userMailID = ExpiringWarranty[0].dataValues.email_id;
-    const findProducts = await MailingList.findAll({
-      where: { email_id: userMailID }
-    });
-    console.log("---------the prods---------", findProducts);
+    // const ExpiringWarranty = await MailingList.findAll({
+    //   where: { email_id: request.user.email }
+    // });
+    // const userMailID = ExpiringWarranty[0].dataValues.email_id;
+    // const findProducts = await MailingList.findAll({
+    //   where: { email_id: userMailID }
+    // });
+    // console.log("---------the prods---------", findProducts);
 
     response.send(fetchedRooms);
   } catch {

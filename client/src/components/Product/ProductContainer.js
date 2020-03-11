@@ -47,98 +47,91 @@ export default function ProductContainer() {
     }
   };
 
-  const maxmoment = moment
-    .duration(
-      moment(state.productState.currentProduct.warranty_end_date).diff(
-        moment(state.productState.currentProduct.warranty_start_date)
-      )
-    )
-    .get("days");
-
-  const nowmoment = moment
-    .duration(
-      moment(state.productState.currentProduct.warranty_end_date).diff(
-        new moment()
-      )
-    )
-    .get("days");
-
-  console.log(
-    "--the current REDS prod list-----",
-    state.productState,
-    "AND MAXMOMENT",
-    maxmoment,
-    "nowMOMENT",
-    nowmoment,
-    `%age:`,
-    Math.floor(((maxmoment - nowmoment) * 100) / maxmoment)
-  );
   return (
     <div className="productcontainer">
       <h2>YOUR PRODUCTS LIST</h2>
       <div>
         {state.productState.products.length > 0 &&
-          state.productState.products.map(product => (
-            <div>
-              <div className="productListing">
-                <Button
-                  onClick={() => {
-                    dispatch({
-                      type: "UPDATE_CURRENT_PRODUCT",
-                      payload: product
-                    });
-                    handleDelete(product.id);
-                  }}
-                >
-                  x
-                </Button>
-                <Button
-                  onClick={() => {
-                    dispatch({
-                      type: "UPDATE_CURRENT_PRODUCT",
-                      payload: product
-                    });
-                    handleEdit(product.id);
-                  }}
-                >
-                  EDIT
-                </Button>
-                <h4>{product.device_name}</h4>
-                <div className="productdatetext"></div>
-                <div>
-                  WARRANTY START DATE:
-                  {moment(product.warranty_start_date).format("MMMM Do YYYY")}
-                </div>
-                <div>
-                  WARRANTY END DATE:
-                  {moment(product.warranty_end_date).format("MMMM Do YYYY")}
-                </div>
-                <h5 className="warrantydays">{`Your warranty will expire in ${moment
-                  .duration(
-                    moment(product.warranty_end_date).diff(new moment())
-                  )
-                  .get("days")} days`}</h5>
-                <ProgressBar
-                  max="100"
-                  now={Math.floor(((maxmoment - nowmoment) * 100) / maxmoment)}
-                ></ProgressBar>
-                <br />
-                <Button>
-                  <Link
-                    to={`room/${params.room_name}/${product.document_name}`}
+          state.productState.products.map(product => {
+            const maxmoment =
+              moment.duration(
+                moment(product.warranty_end_date).diff(
+                  moment(product.warranty_start_date)
+                )
+              )._milliseconds /
+              (1000 * 60 * 60 * 24);
+
+            const nowmoment =
+              moment.duration(
+                moment(product.warranty_end_date).diff(new moment())
+              )._milliseconds /
+              (1000 * 60 * 60 * 24);
+
+            const percentageOver = Math.floor(
+              ((maxmoment - nowmoment) * 100) / maxmoment
+            );
+
+            return (
+              <div>
+                <div className="productListing">
+                  <Button
                     onClick={() => {
                       dispatch({
                         type: "UPDATE_CURRENT_PRODUCT",
                         payload: product
                       });
+                      handleDelete(product.id);
                     }}
                   >
-                    OPEN
-                  </Link>
-                </Button>
+                    x
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      dispatch({
+                        type: "UPDATE_CURRENT_PRODUCT",
+                        payload: product
+                      });
+                      handleEdit(product.id);
+                    }}
+                  >
+                    EDIT
+                  </Button>
+                  <h4>{product.device_name}</h4>
+                  <div className="productdatetext"></div>
+                  <div>
+                    WARRANTY START DATE:
+                    {moment(product.warranty_start_date).format("MMMM Do YYYY")}
+                  </div>
+                  <div>
+                    WARRANTY END DATE:
+                    {moment(product.warranty_end_date).format("MMMM Do YYYY")}
+                  </div>
+                  <h5 className="warrantydays">{`Your warranty will expire in ${Math.floor(
+                    nowmoment
+                  )} days`}</h5>
+                  <ProgressBar
+                    // max={maxmoment}
+                    now={percentageOver}
+                    label={`${percentageOver}%`}
+                  ></ProgressBar>
+                  <br />
+                  <Button>
+                    <Link
+                      to={`room/${params.room_name}/${product.document_name}`}
+                      onClick={() => {
+                        dispatch({
+                          type: "UPDATE_CURRENT_PRODUCT",
+                          payload: product
+                        });
+                      }}
+                    >
+                      OPEN
+                    </Link>
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
       </div>
       <Button className="addButton" onClick={() => seeForm()}>
         + PRODUCT
