@@ -6,7 +6,11 @@ const roomReducer = (state = initialState, action = {}) => {
       return { ...state, rooms: [...state.rooms, action.payload] };
     }
     case "ROOMS_FETCHED": {
-      return { ...state, rooms: action.payload };
+      return {
+        ...state,
+        rooms: action.payload.roomsList,
+        expiringProductIds: action.payload.expiringProductId
+      };
     }
     case "UPDATE_CURRENT_ROOM": {
       return { ...state, currentRoom: action.payload };

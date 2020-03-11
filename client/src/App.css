@@ -56,6 +56,13 @@ p.card-text {
   color: orange;
 }
 
+.expiringproductdashboard {
+  margin-top: 5rem;
+  background-color: #ffc107;
+  padding: 3rem 3rem;
+  color: black;
+}
+
 .roomcards {
   display: inline-block;
   width: 20%;

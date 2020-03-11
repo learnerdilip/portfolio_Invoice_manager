@@ -21,6 +21,8 @@ export const getRooms = () => async (dispatch, getState) => {
   const userToken = getState().user.token;
   const config = { Authorization: `Bearer ${userToken}` };
   const response = await axios.get(`${baseUrl}/rooms`, { headers: config });
+  console.log("---the response for rooms fetched----", response);
+
   dispatch(roomsFetched(response.data));
 };
 const roomsFetched = rooms => {

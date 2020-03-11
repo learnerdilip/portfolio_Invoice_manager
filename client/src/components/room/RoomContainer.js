@@ -6,6 +6,7 @@ import { updateRoomProduct } from "../../store/product/action";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { CardBody } from "react-bootstrap/Card";
+import ExpiringProducts from "./Dashboard/ExpiringProducts";
 
 export default function RoomContainer(props) {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function RoomContainer(props) {
   return (
     <div>
       <h2>Welcome to your Home!</h2>
+      <ExpiringProducts />
       <RoomFormContainer />
       <div className="theroomslist">
         {state.rooms.length > 0 &&
