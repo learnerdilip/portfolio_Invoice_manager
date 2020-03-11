@@ -116,7 +116,11 @@ form {
 }
 
 .addButton {
-  border-radius: 50%;
+  /* border-radius: 50%; */
+  background-color: blue;
+  position: fixed;
+  bottom: 6rem;
+  right: 6rem;
 }
 
 button.btn.btn-primary {

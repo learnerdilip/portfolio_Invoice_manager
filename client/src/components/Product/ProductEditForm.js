@@ -23,7 +23,7 @@ export default function ProductEditForm(props) {
   const [productData, setProductData] = useState(initialState);
   // const [loading, setLoading] = useState(false);
 
-  console.log("---the initial state ----", productData);
+  // console.log("---the initial state ----", productData);
   const handleChange = e => {
     const { name, value } = e.target;
     setProductData(prevState => {

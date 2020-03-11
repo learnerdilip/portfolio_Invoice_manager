@@ -22,7 +22,7 @@ export default function Heading() {
             height="30"
             className="d-inline-block align-top"
           />{" "}
-          Invoice and warranty manger
+          Invoice and warranty manager
         </Navbar.Brand>
         <div className="loginsignupinnav">
           <Link onClick={handleLogout} to="/">

@@ -6,6 +6,7 @@ import { deleteProduct } from "../../store/product/action";
 import ProductForm from "./ProductForm";
 import moment from "moment";
 import ProductEditForm from "./ProductEditForm";
+import { ProgressBar } from "react-bootstrap";
 
 export default function ProductContainer() {
   const params = useParams(); // used to get params from the App.js where Route was defined
@@ -46,6 +47,32 @@ export default function ProductContainer() {
     }
   };
 
+  const maxmoment = moment
+    .duration(
+      moment(state.productState.currentProduct.warranty_end_date).diff(
+        moment(state.productState.currentProduct.warranty_start_date)
+      )
+    )
+    .get("days");
+
+  const nowmoment = moment
+    .duration(
+      moment(state.productState.currentProduct.warranty_end_date).diff(
+        new moment()
+      )
+    )
+    .get("days");
+
+  console.log(
+    "--the current REDS prod list-----",
+    state.productState,
+    "AND MAXMOMENT",
+    maxmoment,
+    "nowMOMENT",
+    nowmoment,
+    `%age:`,
+    Math.floor(((maxmoment - nowmoment) * 100) / maxmoment)
+  );
   return (
     <div className="productcontainer">
       <h2>YOUR PRODUCTS LIST</h2>
@@ -86,11 +113,15 @@ export default function ProductContainer() {
                   WARRANTY END DATE:
                   {moment(product.warranty_end_date).format("MMMM Do YYYY")}
                 </div>
-                <h5 className="warrantydays">{`Your warranty will expire in ${product.WarrantyDaysLeft} Days`}</h5>
-                <progress
-                  max={product.totalwarrantydays}
-                  value={product.WarrantyDaysLeft}
-                ></progress>
+                <h5 className="warrantydays">{`Your warranty will expire in ${moment
+                  .duration(
+                    moment(product.warranty_end_date).diff(new moment())
+                  )
+                  .get("days")} days`}</h5>
+                <ProgressBar
+                  max="100"
+                  now={Math.floor(((maxmoment - nowmoment) * 100) / maxmoment)}
+                ></ProgressBar>
                 <br />
                 <Button>
                   <Link
@@ -110,7 +141,7 @@ export default function ProductContainer() {
           ))}
       </div>
       <Button className="addButton" onClick={() => seeForm()}>
-        +
+        + PRODUCT
       </Button>
       {editData && <ProductEditForm data={editData} />}
       {form && <ProductForm />}
