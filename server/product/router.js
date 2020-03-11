@@ -9,7 +9,7 @@ const router = new Router();
 
 router.post("/product", auth, async (request, response, next) => {
   try {
-    console.log("--the PRODUCT form req--", request.body);
+    // console.log("--the PRODUCT form req--", request.body);
     const productCreated = await Product.create({
       document_name: request.body.documentName,
       name_on_invoice: request.body.nameOnInvoice,
