@@ -88,6 +88,11 @@ router.delete("/product", async (request, response, next) => {
   try {
     const productToRemove = await Product.findByPk(request.query.productId);
     const deleteProd = await productToRemove.destroy();
+    const ProdMailToRemove = await MailingList.findOne({
+      where: { product_id: request.query.productId }
+    });
+    const deleteMail = await ProdMailToRemove.destroy();
+
     response.send(productToRemove);
   } catch (error) {
     next(console.error);
