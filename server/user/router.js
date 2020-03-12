@@ -2,13 +2,12 @@ const { Router } = require("express");
 const User = require("../user/model");
 const bcrypt = require("bcrypt");
 const { toJWT } = require("../auth/jwt");
+const sendMail = require("../sendMail");
 
 const router = new Router();
 
 router.post("/signup", (request, response, next) => {
-  console.log(request.body);
-
-  //validate request(do we have email and pasword in req.body)
+  // console.log("--------the req body---------", request.body);
   if (!request.body.email || !request.body.password) {
     return response.send({
       status: "error",
@@ -18,7 +17,10 @@ router.post("/signup", (request, response, next) => {
   const hashedPassword = bcrypt.hashSync(request.body.password, 10); //hash password using bcrypt
   const user = { ...request.body, password: hashedPassword };
   User.create(user)
-    .then(user => response.send(user))
+    .then(user => {
+      response.send(user);
+      sendMail(user.email); //sending mails
+    })
     .catch(e => {
       // console.log(JSON.stringify(e.errors[0].message, null, 2));
       response.send({

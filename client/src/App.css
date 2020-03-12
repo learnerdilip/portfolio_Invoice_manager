@@ -1,38 +1,193 @@
-.App {
+@import url("https://fonts.googleapis.com/css?family=Concert+One|Lalezar|Luckiest+Guy|Monoton|Russo+One&display=swap");
+.homepage {
+  font-family: "Concert One", cursive;
+  width: 80%;
+  margin: auto;
+  border: gray double 0.5px;
+  padding: 1rem;
+  box-shadow: grey -2px -20px 20px 14px;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.bg-primary {
+  background-color: rgb(0, 199, 280);
+  color: aliceblue;
+}
+
+img {
+  max-width: 100%;
+}
+
+.navbar-light .navbar-brand {
+  color: rgba(0, 0, 0, 0.9);
+  width: 75%;
+  font-variant: all-small-caps;
+  font-weight: bolder;
+  font-size: 2rem;
+}
+.loginsignupinnav {
+  color: black;
+  position: relative;
+}
+
+.loginsignupinnav > a {
+  color: #495057;
+  margin-left: 2rem;
+}
+nav.navbar.navbar-expand.navbar-light.bg-primary {
+  height: 4rem;
+}
+
+.productcontainer {
+  width: 50%;
+  padding: 1rem;
+  border: double 4px;
+  margin: auto;
+  min-height: 100vh;
+}
+
+.theroomslist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 3rem;
+}
+
+p.card-text {
+  color: orange;
+}
+
+.expiringproductdashboard {
+  margin-top: 2rem;
+  background-color: #ffc107;
+  padding: 3rem 3rem;
+  color: black;
+  box-shadow: 0px 0px 5px;
+}
+
+.roomcards {
+  display: inline-block;
+  width: 20%;
+  min-height: 200px;
+  border: solid black 0.5px;
+  margin: 1rem;
+  text-align: center;
+  background-color: white;
+  border-radius: 2rem;
+  font-size: 2.5rem;
+  color: rgb(228, 185, 59);
+  box-shadow: grey -4px 3px 14px 3px;
+}
+
+.productListing {
+  font-family: "Concert One", cursive;
+  padding: 1rem;
+  margin: 1rem;
+  color: #495057;
+  box-shadow: grey 0rem 0rem 1rem;
+}
+
+.editdelbuttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.thedocumentpage {
+  font-family: "Concert One", cursive;
+  width: 60%;
+  margin: auto;
+  padding: 1rem;
+  box-shadow: 2px 7px 20px grey;
+  text-align: center;
+  margin-top: 1rem;
+  min-height: 95vh;
+}
+
+.docwarrantyimage {
+  border: gray double;
+  padding: 2rem;
+  border-radius: 2rem;
+}
+
+.documentdetails {
+  text-align: initial;
+  margin-bottom: 2rem;
+  background-color: #ffc107;
+  padding: 1rem;
+}
+
+.h2,
+h2 {
+  font-size: 2rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+form {
+  width: 60%;
+  margin: auto;
+  padding: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.addButton {
+  /* border-radius: 50%; */
+  background-color: blue;
+  position: fixed;
+  bottom: 6rem;
+  right: 6rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 2rem;
+}
+
+button.btn.btn-primary {
+  background-color: #ffc107;
+}
+
+.roomform {
+  height: 6rem;
+}
+
+.loginhomeredirect {
+  text-align: center;
+}
+
+input.form-control {
+  border-radius: 2rem;
+}
+
+/* .warrantydays {
+  color: rgb(185, 30, 19);
+} */
+
+@media only screen and (max-width: 600px) {
+  .productcontainer {
+    width: 100%;
+    padding: 1rem;
+    border: double 1px;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .homepage {
+    width: 100%;
+    margin: auto;
+    padding: 1rem;
+    box-shadow: grey -2px -20px 20px 14px;
+    text-align: center;
   }
-  to {
-    transform: rotate(360deg);
+  form {
+    width: 90%;
+    min-height: 100vh;
+    padding: 1rem;
+  }
+  .thedocumentpage {
+    width: 100%;
+    padding: 1rem;
+    box-shadow: 2px 7px 20px grey;
+    text-align: center;
+    margin-top: 1rem;
+    min-height: 95vh;
+  }
+  .roomcards {
+    display: inline-block;
+    width: 80%;
   }
 }

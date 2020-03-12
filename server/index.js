@@ -1,8 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const db = require("./db");
 const userRouter = require("./user/router");
 const roomRouter = require("./room/router");
-const documentRouter = require("./document/router");
+const documentRouter = require("./product/router");
 
 const app = express();
 

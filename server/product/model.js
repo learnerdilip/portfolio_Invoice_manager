@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const sequelize = require("../db");
 const Room = require("../room/model");
 
-const Document = sequelize.define("document", {
+const Product = sequelize.define("product", {
   document_name: {
     type: Sequelize.STRING
   },
@@ -34,7 +34,7 @@ const Document = sequelize.define("document", {
   }
 });
 
-Room.hasMany(Document);
-Document.belongsTo(Room);
+Room.hasMany(Product);
+Product.belongsTo(Room);
 
-module.exports = Document;
+module.exports = Product;
