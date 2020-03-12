@@ -15,14 +15,8 @@ export default function Heading() {
     <div>
       <Navbar bg="warning" variant="light">
         <Navbar.Brand href="/">
-          <img
-            alt=""
-            src="/logo.svg"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />{" "}
-          Invoice and warranty manager
+          <i class="fa fa-archive"></i>
+          <b style={{ fontFamily: "Monoton" }}>INVOICE AND WARRANTY MANAGER</b>
         </Navbar.Brand>
         <div className="loginsignupinnav">
           <Link onClick={handleLogout} to="/">

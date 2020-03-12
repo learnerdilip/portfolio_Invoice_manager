@@ -16,7 +16,7 @@ export default function ExpiringProducts() {
 
   // console.log("the length--------", state.expiringProductsList);
 
-  if (!state.expiringProductsList.length)
+  if (!state.expiringProductsList)
     return (
       <div>
         <h3>

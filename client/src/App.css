@@ -1,7 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Great+Vibes|Indie+Flower|Pacifico|Caveat|Permanent+Marker&display=swap");
-
+@import url("https://fonts.googleapis.com/css?family=Concert+One|Lalezar|Luckiest+Guy|Monoton|Russo+One&display=swap");
 .homepage {
-  font-family: "Caveat", cursive;
+  font-family: "Concert One", cursive;
   width: 80%;
   margin: auto;
   border: gray double 0.5px;
@@ -64,6 +63,7 @@ p.card-text {
   background-color: #ffc107;
   padding: 3rem 3rem;
   color: black;
+  box-shadow: 0px 0px 5px;
 }
 
 .roomcards {
@@ -81,7 +81,7 @@ p.card-text {
 }
 
 .productListing {
-  font-family: "Indie Flower", cursive;
+  font-family: "Concert One", cursive;
   padding: 1rem;
   margin: 1rem;
   color: #495057;
@@ -94,7 +94,7 @@ p.card-text {
 }
 
 .thedocumentpage {
-  font-family: "Indie Flower", cursive;
+  font-family: "Concert One", cursive;
   width: 60%;
   margin: auto;
   padding: 1rem;
