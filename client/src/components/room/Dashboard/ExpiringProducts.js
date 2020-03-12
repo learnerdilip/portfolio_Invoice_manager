@@ -29,10 +29,11 @@ export default function ExpiringProducts() {
       <h3>The products with expiring warranty are:</h3>
       <ul>
         {state.expiringProductsList.map(item => (
-          <div>
-            Your {item.deviceName} has {item.warrantyLeft} days left for
+          <h5 className="expirationwarning">
+            Your <b>{item.deviceName}</b> has{" "}
+            <b style={{ color: "orange" }}>{item.warrantyLeft} days</b> left for
             expiration
-          </div>
+          </h5>
         ))}
       </ul>
     </Card>

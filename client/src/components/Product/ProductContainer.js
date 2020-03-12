@@ -75,28 +75,43 @@ export default function ProductContainer() {
             return (
               <Card>
                 <Card.Body className="productListing">
-                  <Button
-                    onClick={() => {
-                      dispatch({
-                        type: "UPDATE_CURRENT_PRODUCT",
-                        payload: product
-                      });
-                      handleDelete(product.id);
-                    }}
-                  >
-                    x
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      dispatch({
-                        type: "UPDATE_CURRENT_PRODUCT",
-                        payload: product
-                      });
-                      handleEdit(product.id);
-                    }}
-                  >
-                    EDIT
-                  </Button>
+                  <div className="editdelbuttons">
+                    <Button
+                      style={{
+                        backgroundColor: "white",
+                        color: "black",
+                        border: "white",
+                        boxShadow: "gray 0px 0px 2px"
+                      }}
+                      onClick={() => {
+                        dispatch({
+                          type: "UPDATE_CURRENT_PRODUCT",
+                          payload: product
+                        });
+                        handleDelete(product.id);
+                      }}
+                    >
+                      <i class="fa fa-trash"></i>
+                    </Button>
+
+                    <Button
+                      style={{
+                        backgroundColor: "white",
+                        color: "black",
+                        border: "white",
+                        boxShadow: "gray 0px 0px 2px"
+                      }}
+                      onClick={() => {
+                        dispatch({
+                          type: "UPDATE_CURRENT_PRODUCT",
+                          payload: product
+                        });
+                        handleEdit(product.id);
+                      }}
+                    >
+                      <i class="fa fa-edit"></i>
+                    </Button>
+                  </div>
                   <h4>{product.device_name}</h4>
                   <div className="productdatetext"></div>
                   <div>
@@ -141,7 +156,7 @@ export default function ProductContainer() {
           })}
       </div>
       <Button className="addButton" onClick={() => seeForm()}>
-        + PRODUCT
+        <i class="fa fa-plus"></i>
       </Button>
       {editData && <ProductEditForm data={editData} />}
       {form && <ProductForm />}

@@ -13,7 +13,7 @@ export default function Footer() {
             height="30"
             className="d-inline-block align-top"
           />{" "}
-          The footer
+          ©️ Dilip , made 🔨 for Portfolio Project
         </Navbar.Brand>
       </Navbar>
     </div>

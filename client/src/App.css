@@ -1,4 +1,15 @@
-@import url("https://fonts.googleapis.com/css?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Great+Vibes|Indie+Flower|Pacifico|Caveat|Permanent+Marker&display=swap");
+
+.homepage {
+  font-family: "Caveat", cursive;
+  width: 80%;
+  margin: auto;
+  border: gray double 0.5px;
+  padding: 1rem;
+  box-shadow: grey -2px -20px 20px 14px;
+  text-align: center;
+  min-height: 100vh;
+}
 
 .bg-primary {
   background-color: rgb(0, 199, 280);
@@ -22,7 +33,7 @@ img {
 }
 
 .loginsignupinnav > a {
-  color: white;
+  color: #495057;
   margin-left: 2rem;
 }
 nav.navbar.navbar-expand.navbar-light.bg-primary {
@@ -34,17 +45,6 @@ nav.navbar.navbar-expand.navbar-light.bg-primary {
   padding: 1rem;
   border: double 4px;
   margin: auto;
-  min-height: 100vh;
-}
-
-.homepage {
-  font-family: "Righteous", cursive;
-  width: 80%;
-  margin: auto;
-  border: gray double 0.5px;
-  padding: 1rem;
-  box-shadow: grey -2px -20px 20px 14px;
-  text-align: center;
   min-height: 100vh;
 }
 
@@ -60,7 +60,7 @@ p.card-text {
 }
 
 .expiringproductdashboard {
-  margin-top: 5rem;
+  margin-top: 2rem;
   background-color: #ffc107;
   padding: 3rem 3rem;
   color: black;
@@ -81,14 +81,20 @@ p.card-text {
 }
 
 .productListing {
-  font-family: "Righteous", cursive;
+  font-family: "Indie Flower", cursive;
   padding: 1rem;
   margin: 1rem;
   color: #495057;
+  box-shadow: grey 0rem 0rem 1rem;
+}
+
+.editdelbuttons {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .thedocumentpage {
-  font-family: "Righteous", cursive;
+  font-family: "Indie Flower", cursive;
   width: 60%;
   margin: auto;
   padding: 1rem;
@@ -129,10 +135,12 @@ form {
   position: fixed;
   bottom: 6rem;
   right: 6rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 2rem;
 }
 
 button.btn.btn-primary {
-  margin-top: 1rem;
   background-color: #ffc107;
 }
 
