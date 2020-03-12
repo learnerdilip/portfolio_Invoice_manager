@@ -2,6 +2,7 @@ const { Router } = require("express");
 const Room = require("./model");
 const auth = require("../auth/middleWare");
 const MailingList = require("../mailing/model");
+const Product = require("../product/model");
 
 const router = new Router();
 
@@ -26,7 +27,7 @@ router.get("/rooms", auth, async (request, response, next) => {
     const prodIdList = await MailingList.findAll({
       where: { email_id: request.user.email }
     });
-    const productIdArr = prodIdList
+    const productIdArr = await prodIdList
       .filter(item => item.dataValues.remaining_warranty <= 30)
       .map(item => {
         return {
@@ -34,11 +35,22 @@ router.get("/rooms", auth, async (request, response, next) => {
           warrantyLeft: item.dataValues.remaining_warranty
         };
       });
-    let newFetchRoomItem = {
-      roomsList: [...fetchedRooms],
-      expiringProductId: productIdArr
-    };
-    response.send(newFetchRoomItem);
+
+    const deviceNameArr = productIdArr.map(async item => {
+      const prodItem = await Product.findByPk(item.productID);
+      item.deviceName = prodItem.device_name;
+      // console.log("--the newItem NOW -----------", item);
+      return item;
+    });
+
+    Promise.all(deviceNameArr).then(async () => {
+      // console.log("deviceNameArr--------------------", deviceNameArr);
+      let newFetchRoomItem = {
+        roomsList: [...fetchedRooms],
+        expiringProductId: productIdArr
+      };
+      response.send(newFetchRoomItem);
+    });
   } catch {
     error => next(error);
   }

@@ -11,7 +11,10 @@ img {
 
 .navbar-light .navbar-brand {
   color: rgba(0, 0, 0, 0.9);
-  width: 80%;
+  width: 75%;
+  font-variant: all-small-caps;
+  font-weight: bolder;
+  font-size: 2rem;
 }
 .loginsignupinnav {
   color: black;
@@ -48,7 +51,7 @@ nav.navbar.navbar-expand.navbar-light.bg-primary {
 .theroomslist {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 3rem;
 }
 
@@ -79,11 +82,9 @@ p.card-text {
 
 .productListing {
   font-family: "Righteous", cursive;
-  border: solid;
   padding: 1rem;
   margin: 1rem;
-  border-radius: 2rem;
-  color: #ffc107;
+  color: #495057;
 }
 
 .thedocumentpage {
@@ -147,9 +148,9 @@ input.form-control {
   border-radius: 2rem;
 }
 
-.warrantydays {
+/* .warrantydays {
   color: rgb(185, 30, 19);
-}
+} */
 
 @media only screen and (max-width: 600px) {
   .productcontainer {

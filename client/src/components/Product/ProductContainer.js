@@ -7,6 +7,7 @@ import ProductForm from "./ProductForm";
 import moment from "moment";
 import ProductEditForm from "./ProductEditForm";
 import { ProgressBar } from "react-bootstrap";
+import Card, { CardBody } from "react-bootstrap/Card";
 
 export default function ProductContainer() {
   const params = useParams(); // used to get params from the App.js where Route was defined
@@ -72,8 +73,8 @@ export default function ProductContainer() {
             );
 
             return (
-              <div>
-                <div className="productListing">
+              <Card>
+                <Card.Body className="productListing">
                   <Button
                     onClick={() => {
                       dispatch({
@@ -106,7 +107,13 @@ export default function ProductContainer() {
                     WARRANTY END DATE:
                     {moment(product.warranty_end_date).format("MMMM Do YYYY")}
                   </div>
-                  <h5 className="warrantydays">{`Your warranty will expire in ${Math.floor(
+                  <h5
+                    style={
+                      (nowmoment < 30 && { color: "red" }) ||
+                      (nowmoment >= 30 && { color: "green" })
+                    }
+                    className="warrantydays"
+                  >{`Your warranty will expire in ${Math.floor(
                     nowmoment
                   )} days`}</h5>
                   <ProgressBar
@@ -128,8 +135,8 @@ export default function ProductContainer() {
                       OPEN
                     </Link>
                   </Button>
-                </div>
-              </div>
+                </Card.Body>
+              </Card>
             );
           })}
       </div>

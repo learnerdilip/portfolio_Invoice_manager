@@ -31,19 +31,6 @@ router.post("/product", auth, async (request, response, next) => {
       remaining_warranty: findRemainingDays(productCreated)
     });
 
-    // const ChangedProd = productCreated;
-
-    // const daysFind = await MailingList.findOne({
-    //   where: {
-    //     product_id: ChangedProd.dataValues.id
-    //   }
-    // });
-
-    // ChangedProd.dataValues.totalwarrantydays =
-    //   daysFind.dataValues.total_warranty;
-    // ChangedProd.dataValues.remianingWarrantyDays =
-    //   daysFind.dataValues.remaining_warranty;
-
     response.send(productCreated);
   } catch (error) {
     next(console.error);
@@ -65,13 +52,30 @@ router.put("/product", async (request, response, next) => {
   try {
     // console.log("the request for edit", request.body);
     const findProd = await Product.findByPk(request.body.id);
-    (findProd.document_name = request.body.documentName),
-      (findProd.name_on_invoice = request.body.nameOnInvoice),
-      (findProd.device_name = request.body.deviceName),
-      (findProd.purchase_date = request.body.purchaseDate),
-      (findProd.warranty_start_date = request.body.warrantyStartDate),
-      (findProd.warranty_end_date = request.body.warrantyEndDate),
-      findProd.save();
+    findProd.document_name = request.body.documentName;
+    findProd.name_on_invoice = request.body.nameOnInvoice;
+    findProd.device_name = request.body.deviceName;
+    findProd.purchase_date = request.body.purchaseDate;
+    findProd.warranty_start_date = request.body.warrantyStartDate;
+    findProd.warranty_end_date = request.body.warrantyEndDate;
+    findProd.save();
+
+    // to edit the mailing table also
+    const editMailingDetails = await MailingList.findOne({
+      where: { product_id: request.body.id }
+    });
+    // console.log("---edit mailing details----", editMailingDetails);
+
+    request.body.warranty_start_date = findProd.warranty_start_date;
+    request.body.warranty_end_date = findProd.warranty_end_date;
+    editMailingDetails.total_warranty = findTotalDays({
+      dataValues: request.body
+    });
+    editMailingDetails.remaining_warranty = findRemainingDays({
+      dataValues: request.body
+    });
+    editMailingDetails.save();
+
     response.send(findProd);
   } catch (error) {
     next(console.error);
@@ -100,21 +104,18 @@ router.delete("/product", async (request, response, next) => {
 
 const findRemainingDays = product => {
   const item = product.dataValues; //the item is a databse type object
-  var een = moment(item.warranty_end_date);
-  var twee = new Date();
-  var duration = moment.duration(een.diff(twee));
-  const daysRemaining = Math.floor(duration.as("days"));
-  // console.log("---the ramining days", daysRemaining);
-  return daysRemaining; //a item with days remaining property
+  const een = moment(item.warranty_end_date);
+  const twee = new Date();
+  const duration = moment.duration(een.diff(twee));
+  return Math.floor(duration._milliseconds / (3600 * 24 * 1000)); //a item with days remaining property
 };
 
 const findTotalDays = product => {
   const item = product.dataValues;
   const een = moment(item.warranty_end_date);
   const twee = moment(item.warranty_start_date);
-  const duration = moment.duration(een.diff(twee)).days();
-  // console.log("---the Total duration days", duration);
-  return duration;
+  const duration = moment.duration(een.diff(twee));
+  return Math.floor(duration._milliseconds / (3600 * 24 * 1000));
 };
 
 module.exports = router;

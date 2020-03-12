@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Card } from "react-bootstrap";
 
 export default function ExpiringProducts() {
   const dispatch = useDispatch();
@@ -13,7 +14,9 @@ export default function ExpiringProducts() {
     };
   });
 
-  if (!state.expiringProductsList)
+  // console.log("the length--------", state.expiringProductsList);
+
+  if (!state.expiringProductsList.length)
     return (
       <div>
         <h3>
@@ -22,22 +25,16 @@ export default function ExpiringProducts() {
       </div>
     );
   return (
-    <div className="expiringproductdashboard">
-      <h3>The product IDs for expiring warranty are:</h3>
+    <Card className="expiringproductdashboard">
+      <h3>The products with expiring warranty are:</h3>
       <ul>
         {state.expiringProductsList.map(item => (
-          <li>
-            ITEM ID: {item.productID} has {item.warrantyLeft} days left for
+          <div>
+            Your {item.deviceName} has {item.warrantyLeft} days left for
             expiration
-          </li>
+          </div>
         ))}
       </ul>
-    </div>
+    </Card>
   );
 }
-
-/***
- * things I need:
- * 1. product name,
- * 2. room name
- * **/
