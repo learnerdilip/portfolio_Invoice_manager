@@ -1,11 +1,38 @@
 const { Router } = require("express");
+const Sequelize = require("sequelize");
 const Product = require("./model");
 const auth = require("../auth/middleWare");
 const cron = require("node-cron");
 const moment = require("moment");
 const MailingList = require("../mailing/model");
+const sendMail = require("../sendMail");
 
 const router = new Router();
+
+// scheduler for running something at regular interval
+cron.schedule("0 8 * * *", async () => {
+  console.log("running a task --------------------------------------------");
+  sendMail(
+    "diliptalks@gmail.com",
+    "Mail sending initiated to expiring warranty users",
+    `Sending mails for today: ${new Date()}`
+  );
+  const MailingListArr = await MailingList.findAll({
+    where: {
+      remaining_warranty: {
+        [Sequelize.Op.lte]: 30
+      }
+    }
+  });
+  const shootMail = MailingListArr.map(mailItem => {
+    const idtosendon = mailItem.dataValues.email_id;
+    sendMail(
+      idtosendon,
+      "Attention! your appliance warranty is expiring",
+      `Your product ID: ${mailItem.dataValues.product_id} is expiring in ${mailItem.dataValues.remaining_warranty} days`
+    );
+  });
+});
 
 router.post("/product", auth, async (request, response, next) => {
   try {
@@ -96,11 +123,6 @@ router.delete("/product", async (request, response, next) => {
     next(console.error);
   }
 });
-
-// scheduler for running something at regular interval
-// cron.schedule("* * * * *", function() {
-//   console.log("running a task every minute");
-// });
 
 const findRemainingDays = product => {
   const item = product.dataValues; //the item is a databse type object
