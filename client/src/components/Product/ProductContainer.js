@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { deleteProduct } from "../../store/product/action";
 import ProductForm from "./ProductForm";
-import moment from "moment";
 import ProductEditForm from "./ProductEditForm";
 import { ProgressBar } from "react-bootstrap";
-import Card, { CardBody } from "react-bootstrap/Card";
+import Card from "react-bootstrap/Card";
+import { durationInDays, formatDate } from "../HelperFunctions";
 
 export default function ProductContainer() {
   const params = useParams(); // used to get params from the App.js where Route was defined
@@ -19,6 +20,13 @@ export default function ProductContainer() {
       productState: reduxState.product
     };
   });
+
+  const buttonStyle = {
+    backgroundColor: "white",
+    color: "black",
+    border: "white",
+    boxShadow: "gray 0px 0px 2px"
+  };
 
   const [form, setForm] = useState(false);
   const [editData, setEditData] = useState(null);
@@ -36,8 +44,8 @@ export default function ProductContainer() {
     }
   };
 
-  const handleEdit = async productId => {
-    const confirmEdit = await window.confirm("You are about to Edit");
+  const handleEdit = productId => {
+    const confirmEdit = window.confirm("You are about to Edit");
     if (confirmEdit) {
       const pdtTochange = state.productState.products.filter(
         prod => prod.id === productId
@@ -54,19 +62,15 @@ export default function ProductContainer() {
       <div>
         {state.productState.products.length > 0 &&
           state.productState.products.map(product => {
-            const maxmoment =
-              moment.duration(
-                moment(product.warranty_end_date).diff(
-                  moment(product.warranty_start_date)
-                )
-              )._milliseconds /
-              (1000 * 60 * 60 * 24);
+            const maxmoment = durationInDays(
+              product.warranty_end_date,
+              product.warranty_start_date
+            );
 
-            const nowmoment =
-              moment.duration(
-                moment(product.warranty_end_date).diff(new moment())
-              )._milliseconds /
-              (1000 * 60 * 60 * 24);
+            const nowmoment = durationInDays(
+              product.warranty_end_date,
+              new moment()
+            );
 
             const percentageOver = Math.floor(
               ((maxmoment - nowmoment) * 100) / maxmoment
@@ -77,12 +81,7 @@ export default function ProductContainer() {
                 <Card.Body className="productListing">
                   <div className="editdelbuttons">
                     <Button
-                      style={{
-                        backgroundColor: "white",
-                        color: "black",
-                        border: "white",
-                        boxShadow: "gray 0px 0px 2px"
-                      }}
+                      style={buttonStyle}
                       onClick={() => {
                         dispatch({
                           type: "UPDATE_CURRENT_PRODUCT",
@@ -95,12 +94,7 @@ export default function ProductContainer() {
                     </Button>
 
                     <Button
-                      style={{
-                        backgroundColor: "white",
-                        color: "black",
-                        border: "white",
-                        boxShadow: "gray 0px 0px 2px"
-                      }}
+                      style={buttonStyle}
                       onClick={() => {
                         dispatch({
                           type: "UPDATE_CURRENT_PRODUCT",
@@ -116,11 +110,11 @@ export default function ProductContainer() {
                   <div className="productdatetext"></div>
                   <div>
                     WARRANTY START DATE:
-                    {moment(product.warranty_start_date).format("MMMM Do YYYY")}
+                    {formatDate(product.warranty_start_date)}
                   </div>
                   <div>
                     WARRANTY END DATE:
-                    {moment(product.warranty_end_date).format("MMMM Do YYYY")}
+                    {formatDate(product.warranty_end_date)}
                   </div>
                   <h5
                     style={
