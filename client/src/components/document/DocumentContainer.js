@@ -11,7 +11,7 @@ export default function DocumentContainer() {
       productState: reduxState.product
     };
   });
-  
+
   const {
     document_name,
     name_on_invoice,
@@ -27,16 +27,25 @@ export default function DocumentContainer() {
     <div className="thedocumentpage">
       <div className="documentdetails">
         <h2>The Document Details</h2>
-        <h5>THE NAME OF DOCUMENT: {document_name}</h5>
-        <h5>NAME ON INVOICE: {name_on_invoice} </h5>
-        <h5>DEVICE NAME: {device_name} </h5>
-        <h5>PURCHASE DATE: {moment(purchase_date).format("MMMM Do YYYY")} </h5>
         <h5>
-          WARRANTY START DATE:{" "}
-          {moment(warranty_start_date).format("MMMM Do YYYY")}{" "}
+          THE NAME OF DOCUMENT: <i>{document_name}</i>
         </h5>
         <h5>
-          WARRANTY END DATE: {moment(warranty_end_date).format("MMMM Do YYYY")}{" "}
+          NAME ON INVOICE: <i>{name_on_invoice}</i>{" "}
+        </h5>
+        <h5>
+          DEVICE NAME: <i>{device_name}</i>{" "}
+        </h5>
+        <h5>
+          PURCHASE DATE: <i>{moment(purchase_date).format("MMMM Do YYYY")}</i>{" "}
+        </h5>
+        <h5>
+          WARRANTY START DATE:{" "}
+          <i>{moment(warranty_start_date).format("MMMM Do YYYY")} </i>
+        </h5>
+        <h5>
+          WARRANTY END DATE:{" "}
+          <i>{moment(warranty_end_date).format("MMMM Do YYYY")} </i>
         </h5>
       </div>
       <div className="docwarrantyimage">
