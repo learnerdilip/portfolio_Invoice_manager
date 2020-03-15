@@ -25,23 +25,23 @@
 
 ## Technologies Used:
 
-# Backend
+### Backend
 
-- Express (server)
-- Postgres, Sequelize (Database and ORM)
-- jsonwebtoken,bcrypt (Authentication)
-- moment (Date and time manipulation)
-- node-cron, nodemailer (For scheduling and sending emails)
+- [Express (server)](/server/index.js)
+- [Postgres, Sequelize (Database and ORM)](/server/db.js)
+- [jsonwebtoken,bcrypt (Authentication)](server/auth/middleWare.js)
+- [moment (Date and time manipulation)](server/product/router.js)
+- [node-cron, nodemailer (For scheduling and sending emails)](server/product/router.js)
 
-# Frontend
+### Frontend
 
-- React, redux, thunk, react-router (front-end framework and supporting libraries)
-- React-Bootstrap (Styling)
-- Axios (for requesting endpoints)
-- cloudinary (to upload images to cloud)
-- moment (for Date-time)
+- [React, redux, thunk, react-router (front-end framework and supporting libraries)](client/src/App.js)
+- [React-Bootstrap (Styling)](client/src/components/Heading.js)
+- [Axios (for requesting endpoints)](client/src/store/product/action.js)
+- [cloudinary (to upload images to cloud)](client/src/components/Product/ProductForm.js)
+- [moment (for Date-time)](client/src/components/HelperFunctions.js)
 
-# miscellaneous
+### miscellaneous
 
 - Git
 - VS Code
