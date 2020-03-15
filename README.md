@@ -1,8 +1,9 @@
 # PF_Invoice_Manager
 
-## A portfolio project that helps manage the headache of Invoices/warranty management. The app aims to let users manage their invoices and get notified by mail or message about expiring warranties so the user can act on them(renew or purchase a new one).
+### A portfolio project that helps manage the headache of Invoices/warranty management. The app aims to let users manage their invoices and get notified by mail or message about expiring warranties so the user can act on them(renew or purchase a new one).
 
-## ✍🏻😀 USER STORIES:
+
+## ✍🏻😀 User stories:
 
 - User (SignedIn) can see their Home with various rooms of their house on the (Home) landing page
 - User can see a dashboard indicating recenty expiring warranties on home page
@@ -24,6 +25,8 @@
 ![](/images/Invoicemanager_wireframing.png)
 
 ## Technologies Used:
+
+(Click on the links to see realted code snippets)
 
 ### Backend
 
