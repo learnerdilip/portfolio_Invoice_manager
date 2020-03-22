@@ -23,7 +23,7 @@
 ## Wireframing:
 
 ![](/images/Invoicemanager_wireframing.png)
-![](/images/invoicedemo.gif)
+
 ## Technologies Used:
 
 (Click on the links to see realted code snippets)
@@ -43,6 +43,10 @@
 - [Axios (for requesting endpoints)](client/src/store/product/action.js)
 - [cloudinary (to upload images to cloud)](client/src/components/Product/ProductForm.js)
 - [moment (for Date-time)](client/src/components/HelperFunctions.js)
+
+### A little DEMO:
+
+![](/images/invoicedemo.gif)
 
 ### miscellaneous
 
