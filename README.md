@@ -23,7 +23,7 @@
 ## Wireframing:
 
 ![](/images/Invoicemanager_wireframing.png)
-
+![](/images/invoicedemo.gif)
 ## Technologies Used:
 
 (Click on the links to see realted code snippets)
